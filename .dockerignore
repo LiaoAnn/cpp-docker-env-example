@@ -1,0 +1,47 @@
+# Compiled object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Compiled dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled executables
+*.exe
+*.out
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Dependency directories
+deps/
+build/
+
+# macOS specific files
+.DS_Store
+
+# Visual Studio specific files
+.vs/
+
+# CMake build directory
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+CMakeLists.txt.user
+
+# Visual Studio generated files
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcproj
+*.vcproj.*
+*.suo
+*.user
+*.user.*
+*.sln.docstates
+*.sdf
+*.opensdf
