@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.12)
 project(MyProject)
 
+find_package(Boost REQUIRED COMPONENTS system filesystem)
+
 # 設置項目的可執行文件
 add_executable(myapp "")
 
@@ -14,32 +16,8 @@ target_sources(myapp PRIVATE ${CPP_SOURCES} ${HEADER_FILES})
 # 設置項目的頭文件
 target_include_directories(myapp PRIVATE include)
 
-# 引入 WebSocketpp
-find_package(websocketpp REQUIRED)
-
 # 添加 WebSocketpp 的頭文件路徑
-target_include_directories(myapp PRIVATE ${WEBSOCKETPP_INCLUDE_DIRS})
+target_include_directories(myapp PRIVATE /usr/include/websocketpp)
 
-# 添加 WebSocketpp 的連結庫
-target_link_libraries(myapp PRIVATE ${WEBSOCKETPP_LIBRARIES})
-
-# 選取多個子資料夾
-file(GLOB SUBDIRECTORIES "lib/*")
-
-# 添加子目錄
-foreach(subdir ${SUBDIRECTORIES})
-    if(IS_DIRECTORY ${subdir})
-        add_subdirectory(${subdir})
-    endif()
-endforeach()
-
-# 選取多個庫
-file(GLOB LIBRARIES "lib/*/lib*.a")
-
-# 鏈接庫
-foreach(lib ${LIBRARIES})
-    target_link_libraries(myapp
-        PRIVATE
-        ${lib}
-    )
-endforeach()
+# 鏈接 Boost 庫
+target_link_libraries(myapp PRIVATE Boost::system Boost::filesystem)
