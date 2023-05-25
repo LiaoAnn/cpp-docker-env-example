@@ -14,6 +14,15 @@ target_sources(myapp PRIVATE ${CPP_SOURCES} ${HEADER_FILES})
 # 設置項目的頭文件
 target_include_directories(myapp PRIVATE include)
 
+# 引入 WebSocketpp
+find_package(websocketpp REQUIRED)
+
+# 添加 WebSocketpp 的頭文件路徑
+target_include_directories(myapp PRIVATE ${WEBSOCKETPP_INCLUDE_DIRS})
+
+# 添加 WebSocketpp 的連結庫
+target_link_libraries(myapp PRIVATE ${WEBSOCKETPP_LIBRARIES})
+
 # 選取多個子資料夾
 file(GLOB SUBDIRECTORIES "lib/*")
 

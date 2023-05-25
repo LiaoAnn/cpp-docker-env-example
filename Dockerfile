@@ -3,7 +3,7 @@ FROM ubuntu:latest AS build
 
 # 安裝必要的軟體包
 RUN apt-get update && \
-    apt-get install -y cmake g++ libboost-all-dev
+    apt-get install -y cmake g++ libboost-all-dev libwebsocketpp-dev
 
 # 複製項目文件到容器中
 COPY . /app
@@ -23,8 +23,14 @@ RUN apt-get update && \
 # 從第一階段中拷貝生成的可執行文件到最終階段
 COPY --from=build /app/build/myapp /app/myapp
 
+# 複製 WebSocketpp 相關檔案到最終階段
+COPY --from=build /usr/include/websocketpp /usr/include/websocketpp
+
 # 指定工作目錄
 WORKDIR /app
 
 # 定義容器執行的命令
 CMD ["./myapp"]
+
+# 指定容器埠號
+EXPOSE 9002
